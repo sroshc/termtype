@@ -1,10 +1,10 @@
-termtype
+**termtype**
 
 A terminal typing game, has a cool terminal manipulation library.
 
 Will work in terminals that support ASCII escape codes and in POSIX compliant environments, i.e. Linux and macOS.
 
-Not compatible on Windows
+Not compatible on Windows 
 
 How to run:
 
@@ -14,4 +14,4 @@ How to run:
     ./output
 
 
-- maybe not macOS actually.
+- maybe not macOS actually
