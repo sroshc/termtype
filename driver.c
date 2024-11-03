@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <time.h>
+#include <stdbool.h>
 
 void s_print(char *buf){
     write(STDOUT_FILENO, buf, strlen(buf));
@@ -54,17 +55,25 @@ int main(int argc, char *argv[]){
     move_cursor(1, 1);
     set_text_color(47);
 
-
     char* curr_word = wlist->word_list[0];
-    move_cursor(10, 1);
-    s_print(wlist->word_list[1]);
     int icurr_word = 0;
     int icurr_char = 0;
     int mistakes = 0;
+
+    int chars_typed = 0;
+
+    time_t starttime;
     move_cursor(1, 1);
     
+    bool first_iteration = true;
     for(char i = getchar(); i != BACKSPACE; i = getchar()){
+        if(first_iteration){
+            time(&starttime);
+            first_iteration = false;
+        }
+
         if(icurr_char >= strlen(curr_word) && i == ' '){
+            chars_typed ++;
             s_print(" ");
             icurr_word++;
             if(icurr_word == num){
@@ -75,6 +84,7 @@ int main(int argc, char *argv[]){
              
         }
         else if(i != '\n' && i != ' ' && i == curr_word[icurr_char]){
+            chars_typed ++;
             icurr_char++;
             snprintf(buf, sizeof(buf), "%c", i);
             s_print(buf);
@@ -84,14 +94,29 @@ int main(int argc, char *argv[]){
         }
     }
 
+    time_t endtime;
+    time(&endtime);
 
-    freewordlist(wlist);
+
+
+
     
 
     restore_screen();
     restore_term_settings();
 
+    double secelapsed = difftime(endtime, starttime);
+
+    double words = (chars_typed - mistakes)/5.0;
+    double minelapsed = secelapsed/60.0;
+
+    double wpm = words/minelapsed;
+
+    printf("WPM: %.2f\n", wpm);
     printf("Mistakes: %d\n", mistakes);
+
+    freewordlist(wlist);
+
 
     return 0;
 
