@@ -2,29 +2,44 @@
 
 **A terminal typing game**
 
--Has a cool terminal manipulation library (doesn't use ncurses or any 3rd party terminal libraries)
+- Has a cool terminal manipulation library (doesn't use ncurses or any 3rd party terminal libraries)
+- Will work in terminals that support ANSI escape codes in macOS and Linux
+- Not compatible on Windows
 
--Will work in terminals that support ANSI escape codes in macOS and Linux
+---
 
--Not compatible on Windows 
+## How to Run
 
-How to run:
+1. **git clone** the repository:
+   ```bash
+   git clone https://github.com/sroshc/termtype.git
+   ```
 
-    git clone https://github.com/sroshc/termtype.git
-    cd termtype
-    make
-    ./termtype
+2. **cd** into the directory:
+   ```bash
+   cd termtype
+   ```
 
+3. **make** the program:
+   ```bash
+   make
+   ```
 
-./termtype accepts 2 integer terminal arguments, the number of words, and
-the top X most used words in english that the words should be picked out from
+4. Run the game:
+   ```bash
+   ./termtype
+   ```
 
+---
 
-For example: 
-    
-    ./termtype 10 200
+### Usage
 
-This will give you the 10 of the top 200 most used words in English to type
+`./termtype` accepts 2 integer terminal arguments, the number of words, and the top X most used words in english that the words should be picked out from.
 
+For example:
+```bash
+./termtype 10 200
+```
+This will give you the 10 of the top 200 most used words in english to type.
 
-- maybe wont work on macOS actually
+-*maybe wont work on macOS actually.*
