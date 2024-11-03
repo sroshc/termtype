@@ -2,7 +2,7 @@
 
 **A terminal typing game**
 
--Has a cool terminal manipulation library
+-Has a cool terminal manipulation library (doesn't use ncurses or any 3rd party terminal libraries)
 
 -Will work in terminals that support ANSI escape codes in macOS and Linux
 
