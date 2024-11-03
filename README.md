@@ -1,10 +1,12 @@
-***termtype***
+# ***termtype***
 
-A terminal typing game, has a cool terminal manipulation library.
+**A terminal typing game**
 
-Will work in terminals that support ASCII escape codes in macOS and Linux
+-Has a cool terminal manipulation library
 
-Not compatible on Windows 
+-Will work in terminals that support ANSI escape codes in macOS and Linux
+
+-Not compatible on Windows 
 
 How to run:
 
@@ -13,11 +15,16 @@ How to run:
     make
     ./termtype
 
+
 ./termtype accepts 2 integer terminal arguments, the number of words, and
 the top X most used words in english that the words should be picked out from
 
-Ex: ./termtype 10 200
+
+For example: 
+    
+    ./termtype 10 200
+
 This will give you the 10 of the top 200 most used words in English to type
 
 
-- maybe not macOS actually
+- maybe wont work on macOS actually
