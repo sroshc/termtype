@@ -44,6 +44,8 @@ int main(int argc, char *argv[]){
 
     char buf[256]; 
 
+    set_text_color(BLUE);
+
     for(int i = 0; wlist->word_list[i]; i++){
         //snprintf(buf, sizeof(buf), wlist->word_list[i]);
         //strcat(buf, " ");
@@ -53,7 +55,8 @@ int main(int argc, char *argv[]){
 
 
     move_cursor(1, 1);
-    set_text_color(47);
+    set_text_color(BACKGROUND_BLACK);
+    set_text_color(GREEN);
 
     char* curr_word = wlist->word_list[0];
     int icurr_word = 0;

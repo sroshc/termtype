@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -g
 OBJ = driver.o word.o term.o worddb.o
-TARGET = output
+TARGET = termtype
 
 all: $(TARGET)
 
