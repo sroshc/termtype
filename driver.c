@@ -8,10 +8,13 @@
 #include <time.h>
 #include <stdbool.h>
 
+#define VERSION "0.0.1"
+
 void s_print(char *buf){
     write(STDOUT_FILENO, buf, strlen(buf));
     return;
 }
+
 
 int main(int argc, char *argv[]){
     WordList* wlist = NULL;
@@ -30,7 +33,6 @@ int main(int argc, char *argv[]){
     ///restore_screen();
     switch_alternate_screen();
     disable_canonical();
-    move_cursor(1, 1);
     clear_screen();
 
     if(!doesfileexist(dbname)){
@@ -42,9 +44,11 @@ int main(int argc, char *argv[]){
 
     initwordlist(&wlist, range, num, dbname);
 
-    char buf[256]; 
+    char buf[512]; 
 
     set_text_color(BLUE);
+
+    move_cursor(3, 1);
 
     for(int i = 0; wlist->word_list[i]; i++){
         //snprintf(buf, sizeof(buf), wlist->word_list[i]);
@@ -55,6 +59,12 @@ int main(int argc, char *argv[]){
 
 
     move_cursor(1, 1);
+
+    set_text_color(GREEN);
+    set_text_color(BACKGROUND_BLACK);
+    snprintf(buf, sizeof(buf), "english%d ", range);
+    s_print(buf);
+
     set_text_color(BACKGROUND_BLACK);
     set_text_color(GREEN);
 
@@ -66,7 +76,7 @@ int main(int argc, char *argv[]){
     int chars_typed = 0;
 
     time_t starttime;
-    move_cursor(1, 1);
+    move_cursor(3, 1);
     
     bool first_iteration = true;
     for(char i = getchar(); i != BACKSPACE; i = getchar()){
@@ -108,11 +118,8 @@ int main(int argc, char *argv[]){
     restore_screen();
     restore_term_settings();
 
-    double secelapsed = difftime(endtime, starttime);
-
+    double minelapsed = difftime(endtime, starttime)/60.0;
     double words = (chars_typed - mistakes)/5.0;
-    double minelapsed = secelapsed/60.0;
-
     double wpm = words/minelapsed;
 
     printf("WPM: %.2f\n", wpm);
@@ -124,6 +131,9 @@ int main(int argc, char *argv[]){
     return 0;
 
 }
+
+
+
 /*
 int main() {
     WordList list;
