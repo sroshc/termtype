@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
-
+#include <sys/ioctl.h>
 
 
 void switch_alternate_screen() {
@@ -15,7 +15,7 @@ void switch_alternate_screen() {
 }
 
 void restore_screen() {
-    printf("\e[?1049l");
+  printf("\e[?1049l");
 	fflush(stdout);
 
 }
@@ -170,6 +170,12 @@ void get_cursor_position(int *row, int *col) {
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 }
 
+int get_term_width(){
+  struct winsize w;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+  return w.ws_col;
+
+}
 
 
 void move_cursor(int x, int y){
