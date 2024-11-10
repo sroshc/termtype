@@ -51,5 +51,7 @@ void clear_line();
 void set_text_color(int color);
 void reset_color();
 int get_term_width();
+void s_print(char *buf);
+
 
 #endif

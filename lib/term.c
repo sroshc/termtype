@@ -199,3 +199,8 @@ void reset_color(){ //Resets color to terminal default
     printf("\033[0m");
 }
 
+
+void s_print(char *buf){
+    write(STDOUT_FILENO, buf, strlen(buf));
+    return;
+}

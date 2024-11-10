@@ -10,9 +10,11 @@
 
 #define VERSION "0.0.1"
 
-void s_print(char *buf){
-    write(STDOUT_FILENO, buf, strlen(buf));
-    return;
+double calculate_wpm(time_t starttime, time_t curr_time, int chars_typed, int mistakes){
+    double minutes_elapsed = difftime(curr_time, starttime)/60.0;
+    double words = (chars_typed-mistakes)/5.0;
+
+    return words/minutes_elapsed;
 }
 
 
@@ -76,6 +78,8 @@ int main(int argc, char *argv[]){
     int chars_typed = 0;
 
     time_t starttime;
+    time_t endtime;
+
     move_cursor(3, 1);
     
     bool first_iteration = true;
@@ -105,66 +109,21 @@ int main(int argc, char *argv[]){
         else{
             mistakes++;
         }
+        time(&endtime);
+
     }
 
-    time_t endtime;
-    time(&endtime);
-
-
-
-
-    
 
     restore_screen();
     restore_term_settings();
 
-    double minelapsed = difftime(endtime, starttime)/60.0;
-    double words = (chars_typed - mistakes)/5.0;
-    double wpm = words/minelapsed;
-
-    printf("WPM: %.2f\n", wpm);
+    printf("WPM: %.2f\n", calculate_wpm(starttime, endtime, chars_typed, mistakes));
     printf("Mistakes: %d\n", mistakes);
 
     freewordlist(wlist);
 
 
     return 0;
+    
 
 }
-
-
-
-/*
-int main() {
-    WordList list;
-    initlist(&list);
-
-    addword(&list, "hello");
-
-    restore_screen();
-    disable_canonical();
-    switch_alternate_screen();
-    clear_screen();
-
-    int a = read_key();
-    fflush(stdout);
-    char buf[10];
-    snprintf(buf, sizeof(buf), "%c\n", a);
- 
-
-    if(a == 127){
-        s_print("Hello");
-    }else{
-
-        s_print(buf);
-
-    
-    }
-
-    read_key();
-    
-    restore_term_settings();
-    
-    return 0; 
-}
-*/
