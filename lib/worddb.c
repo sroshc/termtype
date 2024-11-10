@@ -48,6 +48,7 @@ sqlite3 *create_database(char* name){
     if(rc != SQLITE_OK){
         fprintf(stderr, "SQL error: %s\n", zErrMsg);
         sqlite3_free(zErrMsg);
+        return NULL;
     }
 
     sql = "CREATE INDEX IF NOT EXISTS idx_words_id on WORDS(ID);";
@@ -57,8 +58,10 @@ sqlite3 *create_database(char* name){
     if (rc != SQLITE_OK) {
         fprintf(stderr, "SQL error while creating index: %s\n", zErrMsg);
         sqlite3_free(zErrMsg);
+        return NULL;
     }
 
+    sqlite3_free(zErrMsg);
     return db;
 }
 
@@ -80,7 +83,7 @@ int insert_word(sqlite3 *db, char *word){
     }
 
     free(sql);
-
+    sqlite3_free(zErrMsg);
     return 0;
 
 
@@ -124,6 +127,7 @@ int select_nth_word(sqlite3 *db, int n, char *result){
     }
     
     free(sql);
+    sqlite3_free(zErrMsg);
     return 0;
 }
 
@@ -259,7 +263,6 @@ int freewordlist(WordList* wordlist){
     if(wordlist == NULL) return 0;
 
     sqlite3_close(wordlist->db);
-    //free(wordlist->db);
 
 
     if(wordlist->word_list){
