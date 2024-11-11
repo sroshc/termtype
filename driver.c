@@ -112,22 +112,6 @@ int main(int argc, char *argv[]){
 
         update_wpm(wpm_location, current_wpm);
 
-/*
-        int xtemp, ytemp;
-        get_cursor_position(&xtemp, &ytemp);
-        move_cursor(wpm_location, 1);
-        reset_color();
-        s_clear_line();
-        set_text_color(BACKGROUND_BLACK);
-        set_text_color(GREEN);
-        s_print("WPM: ");
-        set_text_color(RED);
-        char wpmbuf[32];
-        snprintf(wpmbuf, sizeof(wpmbuf), "%.2f", calculate_wpm(starttime, endtime, chars_typed, mistakes));
-        s_print(wpmbuf);
-        move_cursor(xtemp, ytemp);
-        set_text_color(GREEN);
-*/
 
         if(icurr_char >= strlen(curr_word) && i == ' '){
             chars_typed ++;
