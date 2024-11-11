@@ -52,6 +52,9 @@ void set_text_color(int color);
 void reset_color();
 int get_term_width();
 void s_print(char *buf);
+void s_clear_line();
+void enable_cursor();
+void disable_cursor();
 
 
 #endif

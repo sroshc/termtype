@@ -177,7 +177,6 @@ int get_term_width(){
 
 }
 
-
 void move_cursor(int x, int y){
 	printf("\033[%d;%dH", x, y);
 	fflush(stdout);
@@ -203,4 +202,25 @@ void reset_color(){ //Resets color to terminal default
 void s_print(char *buf){
     write(STDOUT_FILENO, buf, strlen(buf));
     return;
+}
+
+void disable_cursor(){
+  s_print("\33[?25l");
+}
+
+void enable_cursor(){
+  s_print("\33[?25h");
+}
+
+void s_clear_line(){
+  int x, y;
+
+  get_cursor_position(&x, &y);
+
+  for(int i = 0; i < get_term_width(); i ++){
+    s_print(" ");
+  }
+
+  move_cursor(x, y);
+  return;
 }
