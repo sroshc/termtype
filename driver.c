@@ -55,8 +55,9 @@ int main(int argc, char *argv[]){
     clear_screen();
 
     if(!doesfileexist(dbname)){
-        printf("word database doesn't exist\n");
+        restore_screen();
         restore_term_settings();
+        printf("Word database was not found\n");
         return 0;
     }
 
